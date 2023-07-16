@@ -18,18 +18,23 @@
     
     <aside>
     
-    <h2>Search for a city:</h2>
+      <h2>Search for a city:</h2>
 
     <section class="row container">
-      <input placeholder="Search" id="search">
+      
+      <input placeholder="Minneapolis" id="search-input">
+      
       <button id="search-button">Search</button>
+    
     </section>
 
-  </aside>
+      <section id=history> </section>
+
+    </aside>
 
   <section>
 
-    <section class="searchedforecast">
+    <section class="searchedforecast" id="todayforcast">
       <p>     </p>
       <p>Temp:</p>
       <p>Wind:</p>
@@ -37,7 +42,7 @@
 
     </section>
 
-    <section class="forcasts">
+    <section  id="fivedayforcast">
       
       <h3>5-day forecast:</h3>
 
@@ -69,7 +74,7 @@ integrity="sha512-pslqxxHAYPCxaSeFSmXXxDkLejD5dbFVC66aiVq0z4v7VTJBU+wqcG1OpNh4p3
 crossorigin="anonymous"
 ></script>
   
-  <script type="text/javascript" src="./openweatherAPI/sample.js"></script>
-  <script type="text/javascript" src="./openweatherAPI/script.js"></script>
+  <script type="text/javascript" src="./JS/sample.js"></script>
+  <script type="text/javascript" src="./JS/script.js"></script>
 </body>
 </html>

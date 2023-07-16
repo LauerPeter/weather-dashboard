@@ -4,6 +4,22 @@
   available here as a global variable. It was named sample in the other file so we'll use that here.
 */
 
+//GLOBAL VARIABLES
+var searchHistory = [];
+var weatherApiRootUrl = 'https://api.openweathermap.org';
+var weatherApiKey = 'd91f911bcf2c0f925fb6535547a5ddc9';
+
+//DOM ELEMENTS
+var searchForm = document.querySelector('#search-button');
+var searchInput = document.querySelector('#search-input');
+var todayContainer = document.querySelector('#todayforcast');
+var forecastContainer = document.querySelector('#5dayforecast');
+var searchHistoryContainer = document.querySelector('#history');
+
+dayjs.extend(window.dayjs_plugin_utc);
+dayjs.extend(window.dayjs_plugin_timezone);
+
+
 
 // This is the array of hour blocks: 8 per day, for a total of 40.
 const daysInForecast = sample.list 
