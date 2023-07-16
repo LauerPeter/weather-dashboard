@@ -1,0 +1,23 @@
+header {
+  background-color: rgb(58, 58, 242);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: larger;
+}
+
+aside {
+  width: 300px;
+  padding-left: 15px;
+}
+
+.whole-page{
+  display: flex;
+}
+
+.searchedforecast {
+  padding: 15px;
+  border: black 1px solid;
+  width: 1200px;
+  margin-top: 15px;
+}
