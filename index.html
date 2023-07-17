@@ -12,6 +12,8 @@
 
   <header>Weather Dashboard</header>
 
+    <div id="currentday"></div>
+
 
 
   <main class="whole-page">
@@ -42,38 +44,57 @@
 
     </section>
 
-    <section  id="fivedayforcast">
+    <section  id="forecastHeader">
       
       <h3>5-day forecast:</h3>
 
-      <div id="container-1"></div>
-      <div id="container-2"></div>
-      <div id="container-3"></div>
-      <div id="container-4"></div>
-      <div id="container-5"></div>
+    </section>
 
+    <section id="fivedayforcast">
+
+      <section id="container-0">
+        <p id="date-0"></p>
+        <p id="img-0"></p>
+        <p>Temp:<span id="temp-0"></span></p>
+        <p>Humidity:<span id="humidity-0"></span></p>
+      </section>
+      
+      <section id="container-1">
+        <p id="date-1"></p>
+        <p id="img-1"></p>
+        <p>Temp:<span id="temp-1"></span></p>
+        <p>Humidity:<span id="humidity-1"></span></p>
+      </section>
+      
+      <section id="container-2">
+        <p id="date-2"></p>
+        <p id="img-2"></p>
+        <p>Temp:<span id="temp-2"></span></p>
+        <p>Humidity:<span id="humidity-2"></span></p>
+      </section>
+      
+      <section id="container-3">
+        <p id="date-3"></p>
+        <p id="img-3"></p>
+        <p>Temp:<span id="temp-3"></span></p>
+        <p>Humidity:<span id="humidity-3"></span></p>
+      </section>
+        
+      <section id="container-4">
+        <p id="date-4"></p>
+        <p id="img-4"></p>
+        <p>Temp:<span id="temp-4"></span></p>
+        <p>Humidity:<span id="humidity-4"></span></p>
+      </section>
 
     </section>
 
   </section>
 
+
 </main>
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
-integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
-crossorigin="anonymous"
-></script>
-<script 
-src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js" 
-integrity="sha512-m00bfmYnAl3plEBlQfeQUhw/U2uvmw29V2+jxSWpAjankMWS+zAsjezbKWDEJNXqWq9o9qQZSOiA2RKDpa4D5w==" 
-crossorigin="anonymous"
-></script>
-<script 
-src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/timezone.min.js" 
-integrity="sha512-pslqxxHAYPCxaSeFSmXXxDkLejD5dbFVC66aiVq0z4v7VTJBU+wqcG1OpNh4p3MjS2D6NCwz/H2QmSc7dXxryg==" 
-crossorigin="anonymous"
-></script>
-  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="./JS/sample.js"></script>
   <script type="text/javascript" src="./JS/script.js"></script>
 </body>

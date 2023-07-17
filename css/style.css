@@ -21,3 +21,19 @@ aside {
   width: 1200px;
   margin-top: 15px;
 }
+
+#fivedayforcast {
+  display: flex;
+  justify-content: space-evenly;
+  border: black 1px solid;
+  margin-right: 5px;
+}
+
+#container-0
+#container-1
+#container-2
+#container-3
+#container-4 {
+  display: flex;
+  
+}
