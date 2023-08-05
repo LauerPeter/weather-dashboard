@@ -29,11 +29,10 @@ aside {
   margin-right: 5px;
 }
 
-#container-0
-#container-1
-#container-2
-#container-3
+#container-0,
+#container-1,
+#container-2,
+#container-3,
 #container-4 {
   display: flex;
-  
 }
