@@ -54,21 +54,20 @@ $(document).ready(function () {
     var temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
     var windSpeed = data.wind.speed;
     var humidity = data.main.humidity;
-    var iconCode = data.weather[0].icon;
     var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
 
     // Update the UI elements with fetched data
-    $("#todayforcast p:nth-child(1)").text(`${cityName} (${date})`);
-    $("#todayforcast .weather-icon").attr("src", iconUrl);
-    $("#todayforcast p:nth-child(2)").html(`Temp: ${temperatureFahrenheit.toFixed(2)} °F`);
-    $("#todayforcast p:nth-child(3)").html(`Wind: ${windSpeed} m/s`);
-    $("#todayforcast p:nth-child(4)").html(`Humidity: ${humidity}%`);
+    $(".city-date").text(`${cityName} (${date})`);
+    $(".weather-icon").attr("src", iconUrl);
+    $("#temp").html(`Temp: ${temperatureFahrenheit.toFixed(2)} °F`);
+    $("#wind").html(`Wind: ${windSpeed} m/s`);
+    $("#humidity").html(`Humidity: ${humidity}%`);
   }
 
   function renderSearchHistory() {
     searchHistoryList.empty();
     searchHistory.forEach(city => {
-      var listItem = $("<li>");
+      var listItem = $("<p>");
       var button = $("<button>").text(city);
       listItem.append(button);
       searchHistoryList.append(listItem);
