@@ -1,26 +1,49 @@
-
-
 $(document).ready(function () {
+
   var apiKey = '422a727a5e93443188202765206175d1'; // Replace with your actual API key
+
   var searchButton = $("#search-button");
   var searchInput = $("#search-input");
   var currentDay = $("#currentday");
   var searchHistoryList = $("#history");
+  var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+  // Render the search history buttons
+  renderSearchHistory();
 
   searchButton.on("click", function () {
     var city = searchInput.val();
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    fetchWeather(city);
+  });
 
+  // Handle search history button click
+  searchHistoryList.on("click", "button", function () {
+    var city = $(this).text();
+    fetchWeather(city);
+  });
+
+  function fetchWeather(city) {
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     fetch(apiUrl)
       .then(response => response.json())
       .then(apiData => {
-        updateCurrentWeatherUI(apiData);
-        saveSearchHistory(city);
+        if (apiData.cod === 200) {
+          // Valid response, update UI and search history
+          updateCurrentWeatherUI(apiData);
+          if (!searchHistory.includes(city)) {
+            searchHistory.push(city);
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+            renderSearchHistory(); // Update the displayed search history
+          }
+        } else {
+          // Invalid response, show error message
+          console.error('Invalid city:', apiData.message);
+        }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  });
+  }
 
   function updateCurrentWeatherUI(data) {
     var cityName = data.name;
@@ -35,7 +58,6 @@ $(document).ready(function () {
     var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
 
     // Update the UI elements with fetched data
-    
     $("#todayforcast p:nth-child(1)").text(`${cityName} (${date})`);
     $("#todayforcast .weather-icon").attr("src", iconUrl);
     $("#todayforcast p:nth-child(2)").html(`Temp: ${temperatureFahrenheit.toFixed(2)} °F`);
@@ -43,23 +65,17 @@ $(document).ready(function () {
     $("#todayforcast p:nth-child(4)").html(`Humidity: ${humidity}%`);
   }
 
-  function saveSearchHistory(city) {
-    var listItem = $("<li>").text(city);
-    searchHistoryList.prepend(listItem);
+  function renderSearchHistory() {
+    searchHistoryList.empty();
+    searchHistory.forEach(city => {
+      var listItem = $("<li>");
+      var button = $("<button>").text(city);
+      listItem.append(button);
+      searchHistoryList.append(listItem);
+    });
   }
 
-  // Loads a default weather data 
-  var defaultCity = "New York"; 
-  var defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}`;
-
-  fetch(defaultApiUrl)
-    .then(response => response.json())
-    .then(apiData => {
-      updateCurrentWeatherUI(apiData);
-      saveSearchHistory(defaultCity);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
+  // Load default weather data
+  var defaultCity = "New York";
+  fetchWeather(defaultCity);
 });
-
