@@ -1,10 +1,7 @@
 
 
-
 $(document).ready(function () {
-  var apiKey = '422a727a5e93443188202765206175d1';
-  var weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}';
-
+  var apiKey = '422a727a5e93443188202765206175d1'; // Replace with your actual API key
   var searchButton = $("#search-button");
   var searchInput = $("#search-input");
   var currentDay = $("#currentday");
@@ -25,39 +22,44 @@ $(document).ready(function () {
       });
   });
 
-  //fetch request to the API URL
-fetch(weatherApiUrl)
-.then(response => response.json())
-.then(apiData => {
-  //process API response data 
-  console.log(apiData);
-  updateCurrentWeatherUI(apiData); //call function to update the UI
-})
-
-.catch(error => {
-  console.error('Error fetching data:', error);
-});
-
   function updateCurrentWeatherUI(data) {
-    // update UI with fetched weather data
-  var windSpeed = data.wind.speed;
-  var humidity = data.main.humidity;
+    var cityName = data.name;
+    var date = new Date().toLocaleDateString("en-US");
+    var iconCode = data.weather[0].icon;
+    var temperatureKelvin = data.main.temp;
+    var temperatureCelsius = temperatureKelvin - 273.15;
+    var temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
+    var windSpeed = data.wind.speed;
+    var humidity = data.main.humidity;
+    var iconCode = data.weather[0].icon;
+    var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
 
-    // switch kelvin to fahrenheit
-  var temperatureKelvin = data.main.temp;
-  var temperatureCelsius = temperatureKelvin - 273.15; // kelvin to celsius
-  var temperatureFahrenheit = (temperatureCelsius * 9/5) + 32; //celsius to fahrenheit
-
-  // Update the UI elements with fetched data
-  $("#todayforcast p:nth-child(2)").text("Temp: " + temperatureFahrenheit.toFixed(2) + " °F"); 
-  $("#todayforcast p:nth-child(3)").text("Wind: " + windSpeed + " m/s");
-  $("#todayforcast p:nth-child(4)").text("Humidity: " + humidity + "%");
+    // Update the UI elements with fetched data
+    
+    $("#todayforcast p:nth-child(1)").text(`${cityName} (${date})`);
+    $("#todayforcast .weather-icon").attr("src", iconUrl);
+    $("#todayforcast p:nth-child(2)").html(`Temp: ${temperatureFahrenheit.toFixed(2)} °F`);
+    $("#todayforcast p:nth-child(3)").html(`Wind: ${windSpeed} m/s`);
+    $("#todayforcast p:nth-child(4)").html(`Humidity: ${humidity}%`);
   }
 
   function saveSearchHistory(city) {
-    // Save searched city to search history section
+    var listItem = $("<li>").text(city);
+    searchHistoryList.prepend(listItem);
   }
+
+  // Loads a default weather data 
+  var defaultCity = "New York"; 
+  var defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${apiKey}`;
+
+  fetch(defaultApiUrl)
+    .then(response => response.json())
+    .then(apiData => {
+      updateCurrentWeatherUI(apiData);
+      saveSearchHistory(defaultCity);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 });
-
-
 

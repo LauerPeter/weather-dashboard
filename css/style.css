@@ -29,6 +29,15 @@ aside {
   margin-right: 5px;
 }
 
+.weather-header {
+  display: flex;
+  align-items: center;
+}
+
+.weather-icon {
+  margin-right: 10px;
+}
+
 #container-0,
 #container-1,
 #container-2,
