@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var apiKey = '422a727a5e93443188202765206175d1'; // Replace with your actual API key
+  var apiKey = '422a727a5e93443188202765206175d1'; 
 
   var searchButton = $("#search-button");
   var searchInput = $("#search-input");
@@ -34,7 +34,7 @@ $(document).ready(function () {
       .then(response => response.json())
       .then(apiData => {
         if (apiData.cod === 200) {
-          // Valid response, update current weather UI
+          // if valid response then update current weather UI
           updateCurrentWeatherUI(apiData);
   
           // Fetch 5-day forecast data
@@ -47,7 +47,6 @@ $(document).ready(function () {
               console.error('Error fetching forecast data:', error);
             });
         } else {
-          // Invalid response, show error message
           console.error('Invalid city:', apiData.message);
         }
       })
@@ -56,7 +55,6 @@ $(document).ready(function () {
       });
   }
   
-
   function updateCurrentWeatherUI(data) {
     var cityName = data.name;
     var date = new Date().toLocaleDateString("en-US");
