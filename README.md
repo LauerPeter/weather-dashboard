@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-# Weather Dashboard Screenshot
+![Weather Dashboard - Google Chrome 8_21_2023 7_20_24 PM](https://github.com/LauerPeter/weather-dashboard/assets/135652706/cca9f773-781c-4db8-bcf9-cad5cd198e15)
 
 ## Description
 
