@@ -14,6 +14,10 @@ $(document).ready(function () {
   searchButton.on("click", function () {
     var city = searchInput.val();
     fetchWeather(city);
+    // Update search history and save to local storage
+    searchHistory.push(city);
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    renderSearchHistory(); // Update the search history UI
   });
 
   // Handle search history button click
@@ -23,18 +27,25 @@ $(document).ready(function () {
   });
 
   function fetchWeather(city) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-    fetch(apiUrl)
+    var currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+  
+    fetch(currentWeatherUrl)
       .then(response => response.json())
       .then(apiData => {
         if (apiData.cod === 200) {
-          // Valid response, update UI and search history
+          // Valid response, update current weather UI
           updateCurrentWeatherUI(apiData);
-          if (!searchHistory.includes(city)) {
-            searchHistory.push(city);
-            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-            renderSearchHistory(); // Update the displayed search history
-          }
+  
+          // Fetch 5-day forecast data
+          fetch(forecastUrl)
+            .then(response => response.json())
+            .then(forecastData => {
+              updateFiveDayForecastUI(forecastData);
+            })
+            .catch(error => {
+              console.error('Error fetching forecast data:', error);
+            });
         } else {
           // Invalid response, show error message
           console.error('Invalid city:', apiData.message);
@@ -44,6 +55,7 @@ $(document).ready(function () {
         console.error('Error fetching data:', error);
       });
   }
+  
 
   function updateCurrentWeatherUI(data) {
     var cityName = data.name;
@@ -78,3 +90,26 @@ $(document).ready(function () {
   var defaultCity = "New York";
   fetchWeather(defaultCity);
 });
+
+function updateFiveDayForecastUI(data) {
+  var forecastItems = data.list;
+
+  for (var i = 1; i <= 5; i++) { // Start from index 1
+    var forecastItem = forecastItems[i * 8 - 1]; // Subtract 1 to get the correct index
+    var date = new Date(forecastItem.dt * 1000).toLocaleDateString("en-US");
+    var iconCode = forecastItem.weather[0].icon;
+    var temperatureKelvin = forecastItem.main.temp;
+    var temperatureCelsius = temperatureKelvin - 273.15;
+    var temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
+    var windSpeed = forecastItem.wind.speed;
+    var humidity = forecastItem.main.humidity;
+    var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+
+    // Update forecast item UI elements
+    $("#date-" + (i - 1)).text(date);
+    $("#img-" + (i - 1)).attr("src", iconUrl);
+    $("#temp-" + (i - 1)).text(`Temp: ${temperatureFahrenheit.toFixed(2)} °F`);
+    $("#wind-" + (i - 1)).text(`Wind: ${windSpeed} m/s`);
+    $("#humidity-" + (i - 1)).text(`Humidity: ${humidity}%`);
+  }
+}

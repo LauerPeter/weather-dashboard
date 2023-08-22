@@ -4,11 +4,34 @@ header {
   padding: 15px;
   text-align: center;
   font-size: larger;
+  border: black 1px solid
 }
 
 aside {
   width: 300px;
   padding-left: 15px;
+}
+
+#history button {
+  margin-top: 8px; 
+  width: 200px;
+}
+
+#search-button {
+  margin-top: 2.5px; 
+  width: 208px;
+  background-color: rgb(58, 58, 242);
+  color: white;
+}
+
+#search-input {
+  margin-top: 5px; 
+  width: 200px;
+}
+
+#dashed-line {
+  margin-top: 15px;
+  font-weight: bold;
 }
 
 .row-container {
@@ -38,17 +61,10 @@ aside {
   margin-right: 10px;
 }
 
-#todayforcast,
-#forecastHeader,
-#fivedayforcast {
-  margin-top: 15px; 
-}
-
 #fivedayforcast {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: black 1px solid;
   margin-top: 15px;
   padding: 5px;
 }
@@ -58,3 +74,19 @@ aside {
   padding: 5px;
   text-align: center; 
 }
+
+.city-date {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+
+#date-0,
+#date-1,
+#date-2,
+#date-3,
+#date-4 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
