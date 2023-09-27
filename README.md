@@ -1,16 +1,16 @@
 # Weather Dashboard
 
-
+Welcome to the Weather Dashboard! Simple and easy to use weather website 
 
 ## Description
 
-A simple weather dashboard application that allows users to search for the current weather and 5-day forecast of a city.
+A simple weather dashboard application that allows users to search for the current weather and the 5-day forecast of a city. A default city will appear when you first load into the website and you can search for any given city within OpenWeatherMap's data.
 
 ## Features
 
 - Display current weather details including temperature, wind speed, and humidity.
 - Show a 5-day forecast with weather information for each day.
-- Search history functionality to quickly access previously searched cities.
+- Local Storage -- Search history functionality to quickly access previously searched cities.
 
 ## Usage
 
