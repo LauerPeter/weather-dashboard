@@ -1,6 +1,8 @@
+
 $(document).ready(function () {
 
-  var apiKey = '422a727a5e93443188202765206175d1'; 
+  ///ENTER YOUR UNIQUE API-KEY FROM HERE - https://openweathermap.org/api
+  var apiKey = ''; 
 
   var searchButton = $("#search-button");
   var searchInput = $("#search-input");
@@ -74,6 +76,7 @@ $(document).ready(function () {
     $("#humidity").html(`Humidity: ${humidity}%`);
   }
 
+  ///Search history functionality
   function renderSearchHistory() {
     searchHistoryList.empty();
     searchHistory.forEach(city => {
@@ -84,7 +87,7 @@ $(document).ready(function () {
     });
   }
 
-  // Load default weather data
+  // Loads default weather data on load in
   var defaultCity = "New York";
   fetchWeather(defaultCity);
 });
